@@ -11,12 +11,15 @@ export default createGlobalStyle`
     --color-grey-0: #F5F5F5;
     
     --color-primary: #27AE60;
+    --color-primary-focus: #93D7AF;
     --color-secondary: #EB5757;
 
     --color-error: #E60000;
     --color-warning: #FFCD07;
     --color-success: #168821;
     --color-information: #155BCB;
+
+    --width-desk: 40rem;
 
     font-size: 60%;   
 
@@ -54,8 +57,16 @@ export default createGlobalStyle`
     font-size: 1.6rem;
   }
 
+  strong{
+    font-weight: 700;
+  }
+
   button {
     cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
   }
 
 `

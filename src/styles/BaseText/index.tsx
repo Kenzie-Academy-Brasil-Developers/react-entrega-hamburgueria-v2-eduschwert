@@ -1,8 +1,8 @@
 import React from "react"
 
 interface iBaseTextProps {
-  tag: string
-  className: string
+  tag: "p" | "span" | "small"
+  className?: string
   children: React.ReactNode
 }
 export const BaseText = ({ tag, className, children }: iBaseTextProps) => {

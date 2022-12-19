@@ -1,19 +1,21 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import { FieldError } from "react-hook-form"
 
-export const SInput = styled.fieldset`
-  fieldset {
-    width: 92%;
+interface iStyledInputProp {
+  error?: FieldError
+  inputClicked?: boolean
+}
 
-    position: relative;
+export const SInput = styled.fieldset<iStyledInputProp>`
+  position: relative;
 
-    padding-top: 1.3rem;
+  padding-top: 1.3rem;
 
-    border: none;
+  border: none;
 
-    max-width: 100%;
-  }
+  max-width: 100%;
 
-  fieldset > input {
+  input {
     width: 100%;
 
     background: var(--color-grey-0);
@@ -29,13 +31,21 @@ export const SInput = styled.fieldset`
     color: var(--color-grey-6);
 
     transition: all 0.1s linear;
+
+    ${({ inputClicked, error }) => {
+      if (inputClicked) {
+        return error
+          ? "border: .2rem solid var(--color-error)"
+          : "border: .2rem solid var(--color-success)"
+      }
+    }}
   }
 
-  fieldset > input:focus {
+  input:focus {
     border: 0.2rem solid var(--color-grey-6);
   }
 
-  fieldset > label {
+  label {
     pointer-events: none;
 
     position: absolute;
@@ -47,20 +57,28 @@ export const SInput = styled.fieldset`
     background: var(--color-grey-0);
 
     padding: 0.5rem;
-  }
 
-  fieldset > input:focus + label,
-  fieldset > input:not(:placeholder-shown) + label {
     font-size: 1.2rem;
     color: var(--color-grey-2);
-
-    top: 0;
-
-    background: var(--color-background);
   }
-  fieldset > input:focus,
-  fieldset > input:not(:placeholder-shown) {
-    background: var(--color-background);
-    border: 0.2rem solid;
+
+  input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
+
+  ${({ inputClicked }) => {
+    if (inputClicked) {
+      return css`
+        label {
+          top: 0;
+
+          background: var(--color-background);
+        }
+        input {
+          background: var(--color-background);
+        }
+      `
+    }
+  }}
 `

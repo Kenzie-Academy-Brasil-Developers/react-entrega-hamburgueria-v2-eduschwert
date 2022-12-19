@@ -6,7 +6,11 @@ import { BaseTitle } from "./BaseTitle"
 interface iText {
   fontSize: string
   fontWeigth: "400" | "600" | "700"
-  color: "var(color-grey-6)"
+  color:
+    | "var(--color-grey-6)"
+    | "var(--color-grey-3)"
+    | "var(--color-grey-2)"
+    | "var(--color-error)"
   textAlign?: string
   marginTop?: string
   marginBottom?: string
