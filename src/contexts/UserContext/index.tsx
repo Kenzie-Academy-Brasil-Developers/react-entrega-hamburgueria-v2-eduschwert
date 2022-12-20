@@ -48,6 +48,7 @@ interface iUserContext {
   ) => void
   globalLoading: boolean
   products: iProduct[] | null
+  logout: () => void
 }
 
 export interface iRequestError {
@@ -113,8 +114,14 @@ export const UserProvider = ({ children }: iUserProviderProps) => {
       setLoading(false)
     }
   }
+  const logout = () => {
+    localStorage.removeItem("@TOKEN")
+    setProducts(null)
+  }
   return (
-    <UserContext.Provider value={{ login, register, globalLoading, products }}>
+    <UserContext.Provider
+      value={{ login, register, globalLoading, products, logout }}
+    >
       {children}
     </UserContext.Provider>
   )

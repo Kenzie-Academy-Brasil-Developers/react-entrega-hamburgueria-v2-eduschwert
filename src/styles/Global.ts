@@ -5,6 +5,7 @@ export default createGlobalStyle`
     --color-background: #FFFFFF;
     
     --color-grey-6: #333333;
+    --color-grey-4: #BDBDBD;
     --color-grey-3: #828282;
     --color-grey-2:  #999999;
     --color-grey-1: #E0E0E0;
@@ -18,8 +19,6 @@ export default createGlobalStyle`
     --color-warning: #FFCD07;
     --color-success: #168821;
     --color-information: #155BCB;
-
-    --width-desk: 40rem;
 
     font-size: 60%;   
 

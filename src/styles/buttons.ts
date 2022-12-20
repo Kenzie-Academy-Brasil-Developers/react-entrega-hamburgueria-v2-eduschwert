@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"
 
 interface iStyledButtonProps {
   buttonsize: "default" | "medium"
-  buttonstyle: "primary" | "grey"
+  buttonstyle: "primary" | "grey-1" | "grey-4"
 }
 
 export const buttonCSS = css<iStyledButtonProps>`
@@ -49,7 +49,7 @@ export const buttonCSS = css<iStyledButtonProps>`
             border: 0.2rem solid var(--color-primary-focus);
           }
         `
-      case "grey":
+      case "grey-1":
         return css`
           background: var(--color-grey-1);
           border: 0.2rem solid var(--color-grey-1);
@@ -59,7 +59,21 @@ export const buttonCSS = css<iStyledButtonProps>`
           &:hover {
             background: var(--color-grey-3);
             border: 0.2rem solid var(--color-grey-3);
+
             color: var(--color-grey-1);
+          }
+        `
+      case "grey-4":
+        return css`
+          background: var(--color-grey-4);
+          border: 0.2rem solid var(--color-grey-4);
+
+          font-size: 1.4rem;
+          color: var(--color-background);
+
+          &:hover {
+            background: var(--color-primary);
+            border: 0.2rem solid var(--color-primary);
           }
         `
       default:
@@ -73,4 +87,13 @@ export const StyledButton = styled.button<iStyledButtonProps>`
 
 export const StyledLinkButton = styled(Link)<iStyledButtonProps>`
   ${buttonCSS}
+`
+
+export const StyledButtonReset = styled.button`
+  background: none;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

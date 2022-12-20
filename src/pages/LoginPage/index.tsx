@@ -84,7 +84,7 @@ export const LoginPage = () => {
             <StyledLinkButton
               to="/register"
               buttonsize="default"
-              buttonstyle="grey"
+              buttonstyle="grey-1"
             >
               Cadastrar
             </StyledLinkButton>

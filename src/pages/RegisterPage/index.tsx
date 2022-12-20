@@ -81,7 +81,11 @@ export const RegisterPage = () => {
               error={errors.passwordConfirm}
               disabled={loading}
             />
-            <StyledButton type="submit" buttonsize="default" buttonstyle="grey">
+            <StyledButton
+              type="submit"
+              buttonsize="default"
+              buttonstyle="grey-1"
+            >
               <Spinner loading={loading} />
               {!loading && "Cadastrar"}
             </StyledButton>

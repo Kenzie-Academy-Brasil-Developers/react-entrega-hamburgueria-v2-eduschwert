@@ -11,6 +11,8 @@ interface iText {
     | "var(--color-grey-3)"
     | "var(--color-grey-2)"
     | "var(--color-error)"
+    | "var(--color-primary)"
+    | "var(--color-background)"
   textAlign?: string
   marginTop?: string
   marginBottom?: string

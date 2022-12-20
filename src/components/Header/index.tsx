@@ -1,35 +1,61 @@
-import React from "react"
+import React, { useContext, useState } from "react"
+import { UserContext } from "../../contexts/UserContext"
+import { CartContext } from "../../contexts/CartContext"
 import { ContainerDashboard } from "../../styles/Container"
 import logo from "../../assets/logo.svg"
-import logout from "../../assets/logout.svg"
-import buttonSearch from "../../assets/button-search.svg"
+import logoutIMG from "../../assets/logout.svg"
 import cart from "../../assets/cart.svg"
+import searchIcon from "../../assets/search-icon.svg"
+import buttonSearch from "../../assets/button-search.svg"
 import {
   StyledButtonHeaderCart,
-  StyledButtonHeaderLogout,
+  StyledButtonResetSearch,
+  StyledFormSearch,
   StyledHeader,
-  StyledInputSearch,
 } from "./style"
+import { StyledButtonReset } from "../../styles/buttons"
 
-export const Header = () => {
+interface iHeaderProps {
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Header = ({ setSearch, setOpen }: iHeaderProps) => {
+  const { logout } = useContext(UserContext)
+  const { cartProducts } = useContext(CartContext)
+  const [input, setInput] = useState("")
+  const [openSearch, setOpenSearch] = useState(false)
   return (
     <StyledHeader>
       <ContainerDashboard>
         <img src={logo} alt="Logo" />
         <div>
-          <form>
-            <StyledInputSearch type="text" />
-            <button>
+          <StyledButtonResetSearch onClick={() => setOpenSearch(true)}>
+            <img src={searchIcon} alt="Botão de pesquisa" />
+          </StyledButtonResetSearch>
+          <StyledFormSearch
+            onSubmit={(event) => {
+              event.preventDefault()
+              setSearch(input)
+              setOpenSearch(false)
+            }}
+            openSearch={openSearch}
+          >
+            <input
+              onChange={(event) => setInput(event.target.value)}
+              type="text"
+            />
+            <button type="submit">
               <img src={buttonSearch} alt="Search Button" />
             </button>
-          </form>
-          <StyledButtonHeaderCart>
+          </StyledFormSearch>
+          <StyledButtonHeaderCart onClick={() => setOpen(true)}>
             <img src={cart} alt="Cart" />
-            <div>0</div>
+            <div>{cartProducts.length}</div>
           </StyledButtonHeaderCart>
-          <StyledButtonHeaderLogout>
-            <img src={logout} alt="Logout" />
-          </StyledButtonHeaderLogout>
+          <StyledButtonReset>
+            <img onClick={() => logout()} src={logoutIMG} alt="Logout" />
+          </StyledButtonReset>
         </div>
       </ContainerDashboard>
     </StyledHeader>

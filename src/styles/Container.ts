@@ -24,7 +24,7 @@ export const ContainerLogin = styled(Container)`
     gap: 2rem;
   }
 
-  @media (min-height: 45rem) {
+  @media (min-height: 30rem) {
     height: 100vh;
   }
 `
@@ -44,10 +44,10 @@ export const ContainerRegister = styled(Container)`
     gap: 2rem;
   }
 
-  @media (min-height: 45rem) {
+  @media (min-height: 35rem) {
     height: 100vh;
   }
 `
 export const ContainerDashboard = styled(Container)`
-  width: 136.8rem;
+  width: 105.8rem;
 `
