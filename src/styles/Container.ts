@@ -22,10 +22,9 @@ export const ContainerLogin = styled(Container)`
     flex-direction: row;
     justify-content: space-between;
     gap: 2rem;
-  }
-
-  @media (min-height: 30rem) {
-    height: 100vh;
+    @media (min-height: 30rem) {
+      height: 100vh;
+    }
   }
 `
 export const ContainerRegister = styled(Container)`
@@ -42,12 +41,12 @@ export const ContainerRegister = styled(Container)`
     flex-direction: row-reverse;
     justify-content: space-between;
     gap: 2rem;
-  }
-
-  @media (min-height: 35rem) {
-    height: 100vh;
+    @media (min-height: 35rem) {
+      height: 100vh;
+    }
   }
 `
 export const ContainerDashboard = styled(Container)`
+  min-width: 27rem;
   width: 105.8rem;
 `

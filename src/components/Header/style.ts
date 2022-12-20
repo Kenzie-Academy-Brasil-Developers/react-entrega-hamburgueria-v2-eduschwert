@@ -11,7 +11,11 @@ export const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
 
-    gap: 1rem;
+    gap: 0.5rem;
+  }
+  > div > img {
+    width: 52%;
+    max-width: 15.9rem;
   }
   > div > div {
     display: flex;
@@ -110,7 +114,8 @@ export const StyledFormSearch = styled.form<iStyledFormSearchProps>`
       return css`
         display: flex;
         position: absolute;
-        width: 96%;
+        width: 97%;
+        left: 2%;
         z-index: 99;
         button {
           top: 0.8rem;
