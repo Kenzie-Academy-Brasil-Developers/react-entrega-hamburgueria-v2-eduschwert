@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
-import XClose from "../../assets/X.svg"
+import { useOutclick } from "../../hooks/useOutClick"
+import xClose from "../../assets/X.svg"
 import trashIcon from "../../assets/trash-icon.svg"
 import lessIcon from "../../assets/less.svg"
 import plusIcon from "../../assets/plus.svg"
@@ -13,7 +14,7 @@ interface iModalCartProps {
   closeModal: () => void
 }
 
-interface iProduct {
+export interface iProduct {
   id: number
   name: string
   category: string
@@ -22,6 +23,50 @@ interface iProduct {
 }
 
 export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
+  const decreaseProduct = (product: iProduct) => {
+    const copyCartProducts = [...cartProducts]
+    copyCartProducts.splice(
+      copyCartProducts.findIndex(
+        (productCopy) => productCopy.id === product.id
+      ),
+      1
+    )
+    setCartProducts(copyCartProducts)
+    if (
+      !copyCartProducts.some((productCopy) => productCopy.id === product.id)
+    ) {
+      setCartProductsNoRepeat((oldCartProductsNoRepeat) =>
+        oldCartProductsNoRepeat.filter(
+          (productCopy) => !(productCopy.id === product.id)
+        )
+      )
+    }
+  }
+  const increaseProduct = (product: iProduct) => {
+    setCartProducts((oldCartProducts) => [...oldCartProducts, product])
+  }
+  const deleteProduct = (product: iProduct) => {
+    setCartProducts((oldCartProducts) =>
+      oldCartProducts.filter((oldProduct) => !(oldProduct.id === product.id))
+    )
+    setCartProductsNoRepeat((oldCartProductsNoRepeat) =>
+      oldCartProductsNoRepeat.filter(
+        (oldProductNoRepeat) => !(oldProductNoRepeat.id === product.id)
+      )
+    )
+  }
+  const sumProducts = (productsArr: iProduct[]) =>
+    cartProducts
+      .reduce((accumulator, product) => accumulator + product.price, 0)
+      .toLocaleString("pt-br", {
+        style: "currency",
+        currency: "BRL",
+      })
+  const removeAllProducts = () => {
+    setCartProducts([])
+    setCartProductsNoRepeat([])
+  }
+  const modalRef = useOutclick(() => closeModal())
   const {
     cartProducts,
     setCartProducts,
@@ -30,7 +75,7 @@ export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
   } = useContext(CartContext)
   return (
     <StyledModal isClosing={isClosing}>
-      <div>
+      <div ref={modalRef}>
         <div>
           <STitle
             tag="h4"
@@ -45,7 +90,7 @@ export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
               closeModal()
             }}
           >
-            <img src={XClose} alt="X" />
+            <img src={xClose} alt="X" />
           </StyledButtonReset>
         </div>
         {cartProductsNoRepeat.length === 0 ? (
@@ -87,31 +132,7 @@ export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
                           {product.name}
                         </STitle>
                         <div>
-                          <button
-                            onClick={() => {
-                              const arr = [...cartProducts]
-                              arr.splice(
-                                arr.findIndex(
-                                  (productArr) => productArr.id === product.id
-                                ),
-                                1
-                              )
-                              setCartProducts(arr)
-                              if (
-                                !arr.some(
-                                  (productArr) => productArr.id === product.id
-                                )
-                              ) {
-                                setCartProductsNoRepeat(
-                                  (oldCartProductsNoRepeat) =>
-                                    oldCartProductsNoRepeat.filter(
-                                      (productArr) =>
-                                        !(productArr.id === product.id)
-                                    )
-                                )
-                              }
-                            }}
-                          >
+                          <button onClick={() => decreaseProduct(product)}>
                             <img src={lessIcon} alt="Ícone de menos" />
                           </button>
                           <div>
@@ -121,34 +142,13 @@ export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
                               ).length
                             }
                           </div>
-                          <button
-                            onClick={() =>
-                              setCartProducts((oldCartProducts) => [
-                                ...oldCartProducts,
-                                product,
-                              ])
-                            }
-                          >
+                          <button onClick={() => increaseProduct(product)}>
                             <img src={plusIcon} alt="Ícone de mais" />
                           </button>
                         </div>
                       </div>
                     </div>
-                    <StyledButtonReset
-                      onClick={() => {
-                        setCartProducts((oldCartProducts) =>
-                          oldCartProducts.filter(
-                            (oldProduct) => !(oldProduct.id === product.id)
-                          )
-                        )
-                        setCartProductsNoRepeat((oldCartProductsNoRepeat) =>
-                          oldCartProductsNoRepeat.filter(
-                            (oldProductNoRepeat) =>
-                              !(oldProductNoRepeat.id === product.id)
-                          )
-                        )
-                      }}
-                    >
+                    <StyledButtonReset onClick={() => deleteProduct(product)}>
                       <img src={trashIcon} alt="Ícone de lixeira" />
                     </StyledButtonReset>
                   </li>
@@ -170,22 +170,11 @@ export const ModalCart = ({ isClosing, closeModal }: iModalCartProps) => {
                   fontWeigth="600"
                   color="var(--color-grey-3)"
                 >
-                  {cartProducts
-                    .reduce(
-                      (accumulator, product) => accumulator + product.price,
-                      0
-                    )
-                    .toLocaleString("pt-br", {
-                      style: "currency",
-                      currency: "BRL",
-                    })}
+                  {sumProducts(cartProducts)}
                 </SText>
               </div>
               <StyledButton
-                onClick={() => {
-                  setCartProducts([])
-                  setCartProductsNoRepeat([])
-                }}
+                onClick={() => removeAllProducts()}
                 buttonsize="default"
                 buttonstyle="grey-1"
               >

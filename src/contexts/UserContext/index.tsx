@@ -2,58 +2,14 @@ import { createContext, useEffect, useState } from "react"
 import { api } from "../../services/api"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
-
-interface iUserProviderProps {
-  children: React.ReactNode
-}
-
-interface iLoginForm {
-  email: string
-  password: string
-}
-interface iRegisterForm {
-  name: string
-  email: string
-  password: string
-  passwordConfirm: string
-}
-
-interface iProduct {
-  id: number
-  name: string
-  category: string
-  price: number
-  img: string
-}
-
-interface iUser {
-  name: string
-  email: string
-  id: string
-}
-
-interface iResponse {
-  user: iUser
-  accessToken: string
-}
-
-interface iUserContext {
-  login: (
-    formData: iLoginForm,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void
-  register: (
-    formData: iRegisterForm,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) => void
-  globalLoading: boolean
-  products: iProduct[] | null
-  logout: () => void
-}
-
-export interface iRequestError {
-  data: string
-}
+import {
+  iLoginForm,
+  iProduct,
+  iRegisterForm,
+  iResponse,
+  iUserContext,
+  iUserProviderProps,
+} from "./types"
 
 export const UserContext = createContext({} as iUserContext)
 

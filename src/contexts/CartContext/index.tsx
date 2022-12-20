@@ -1,23 +1,5 @@
 import { createContext, useState } from "react"
-
-interface iUserProviderProps {
-  children: React.ReactNode
-}
-
-interface iProduct {
-  id: number
-  name: string
-  category: string
-  price: number
-  img: string
-}
-
-interface iCartContext {
-  cartProducts: iProduct[]
-  setCartProducts: React.Dispatch<React.SetStateAction<iProduct[] | []>>
-  cartProductsNoRepeat: iProduct[]
-  setCartProductsNoRepeat: React.Dispatch<React.SetStateAction<iProduct[] | []>>
-}
+import { iCartContext, iUserProviderProps, iProduct } from "./types"
 
 export const CartContext = createContext({} as iCartContext)
 

@@ -15,12 +15,12 @@ interface iProduct {
 
 interface iProductsProps {
   filteredList: undefined | iProduct[]
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Products = ({
   filteredList: products,
-  setOpen,
+  setOpenModal,
 }: iProductsProps) => {
   const { setCartProducts, setCartProductsNoRepeat } = useContext(CartContext)
   return (
@@ -65,14 +65,14 @@ export const Products = ({
                     ...oldCartProducts,
                     product,
                   ])
-                  setCartProductsNoRepeat((oldProductsNoRepeat) =>
-                    oldProductsNoRepeat.some(
+                  setCartProductsNoRepeat((oldCartProductsNoRepeat) =>
+                    oldCartProductsNoRepeat.some(
                       (oldProduct) => oldProduct.id === product.id
                     )
-                      ? [...oldProductsNoRepeat]
-                      : [...oldProductsNoRepeat, product]
+                      ? [...oldCartProductsNoRepeat]
+                      : [...oldCartProductsNoRepeat, product]
                   )
-                  setOpen(true)
+                  setOpenModal(true)
                 }}
                 buttonsize="medium"
                 buttonstyle="grey-4"

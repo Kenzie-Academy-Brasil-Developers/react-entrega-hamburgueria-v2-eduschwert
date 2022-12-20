@@ -17,10 +17,10 @@ import { StyledButtonReset } from "../../styles/buttons"
 
 interface iHeaderProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Header = ({ setSearch, setOpen }: iHeaderProps) => {
+export const Header = ({ setSearch, setOpenModal }: iHeaderProps) => {
   const { logout } = useContext(UserContext)
   const { cartProducts } = useContext(CartContext)
   const [input, setInput] = useState("")
@@ -49,7 +49,7 @@ export const Header = ({ setSearch, setOpen }: iHeaderProps) => {
               <img src={buttonSearch} alt="Search Button" />
             </button>
           </StyledFormSearch>
-          <StyledButtonHeaderCart onClick={() => setOpen(true)}>
+          <StyledButtonHeaderCart onClick={() => setOpenModal(true)}>
             <img src={cart} alt="Cart" />
             <div>{cartProducts.length}</div>
           </StyledButtonHeaderCart>

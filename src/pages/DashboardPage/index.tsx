@@ -9,14 +9,14 @@ import { ContainerDashboard } from "../../styles/Container"
 export const DashboardPage = () => {
   const { products } = useContext(UserContext)
   const [search, setSearch] = useState("")
-  const [open, setOpen] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
   const [isClosing, setClosing] = useState(false)
 
   const closeModal = () => {
     setClosing(true)
     setTimeout(() => {
       setClosing(false)
-      setOpen(false)
+      setOpenModal(false)
     }, 200)
   }
 
@@ -28,10 +28,10 @@ export const DashboardPage = () => {
   )
   return (
     <FramerMotion>
-      {open && <ModalCart isClosing={isClosing} closeModal={closeModal} />}
-      <Header setSearch={setSearch} setOpen={setOpen} />
+      {openModal && <ModalCart isClosing={isClosing} closeModal={closeModal} />}
+      <Header setSearch={setSearch} setOpenModal={setOpenModal} />
       <ContainerDashboard>
-        <Products setOpen={setOpen} filteredList={filteredList} />
+        <Products setOpenModal={setOpenModal} filteredList={filteredList} />
       </ContainerDashboard>
     </FramerMotion>
   )
