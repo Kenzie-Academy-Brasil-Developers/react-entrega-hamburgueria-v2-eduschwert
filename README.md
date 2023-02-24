@@ -1,6 +1,6 @@
 <h1 align="center">Hamburgueria Da Kenzie</h1>
 
-<p align="center"><img width="800" alt="ilustração" src="./src/assets/project-ilustration.gif"/></p>
+<p align="center"><img width="800" alt="ilustração" src="./src/assets/project-illustration.gif"/></p>
 
 <h3 align="center">Plataforma de venda de hambúrgueres, com visual simples e minimalista.</h3>
 
