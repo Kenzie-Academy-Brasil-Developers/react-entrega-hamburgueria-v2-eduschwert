@@ -6,6 +6,8 @@
 
 <h4 align="center">Status do projeto: 🚧   Concluído 🚀 🚧</h4>
 
+<h4 align="center">Deploy da aplicação: <a href="https://react-entrega-hamburgueria-v2-eduschwert.vercel.app">Vercel</a></h4>
+
 <h3>Features</h3>
 
 - [x] Cadastro de usuário
