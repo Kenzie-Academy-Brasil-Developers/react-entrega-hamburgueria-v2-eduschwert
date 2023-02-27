@@ -12,6 +12,7 @@
 
 - [x] Cadastro de usuário
 - [x] Login de usuário
+- [x] AutoLogin
 - [x] Adicionar e remover produtos do carrinho
 - [x] Filtrar produtos por meio de um campo de busca
 
@@ -49,6 +50,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Yup](https://www.npmjs.com/package/yup/)
 - [React Hook Form](https://react-hook-form.com/)
 - [Framer Motion](https://www.framer.com/motion/)
+- [React Router](https://reactrouter.com/en/main)
 
 <h3>Autor</h3>
 
